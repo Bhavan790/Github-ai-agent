@@ -1,10 +1,12 @@
 """
-Claude API wrapper.
+Gemini API wrapper (replaces Anthropic Claude).
 All AI thinking happens here.
 """
 
 import os
-import anthropic
+import json
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,11 +14,12 @@ load_dotenv()
 
 class ClaudeClient:
     def __init__(self):
-        api_key = os.getenv("ANTHROPIC_API_KEY")
+        api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY not set in .env")
-        self.client = anthropic.Anthropic(api_key=api_key)
-        self.model = "claude-sonnet-4-6"
+            raise ValueError("GEMINI_API_KEY not set in environment variables")
+
+        self.client = genai.Client(api_key=api_key)
+        self.model = "gemini-2.5-flash"
         self.agent_name = os.getenv("AGENT_NAME", "BhavanBot")
 
         # System prompt — defines the agent's personality
@@ -39,14 +42,17 @@ Keep responses under 300 words unless reviewing code.
 Use markdown formatting for GitHub comments."""
 
     def think(self, prompt: str, max_tokens: int = 500) -> str:
-        """General purpose Claude call."""
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}],
+        """General purpose Gemini call."""
+        config = types.GenerateContentConfig(
+            system_instruction=self.system_prompt,
+            max_output_tokens=max_tokens,
         )
-        return response.content[0].text
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=prompt,
+            config=config,
+        )
+        return response.text
 
     def respond_to_issue(self, issue_title: str, issue_body: str, repo_name: str) -> str:
         prompt = f"""Someone opened a GitHub issue on Bhavan's repo "{repo_name}".
@@ -73,14 +79,20 @@ Issue body: {issue_body}
 Choose from: ["bug", "feature", "documentation", "question", "enhancement", "help wanted"]
 Return ONLY the JSON list, nothing else. Example: ["bug", "help wanted"]"""
         result = self.think(prompt, max_tokens=50)
-        import json
         try:
-            # Clean up response and parse
-            result = result.strip().replace("'", '"')
-            labels = json.loads(result)
-            return [l for l in labels if l in ["bug", "feature", "documentation", "question", "enhancement", "help wanted"]]
+            # Strip potential markdown formatting block ```json ... ```
+            cleaned_result = (
+                result.strip()
+                .replace("```json", "")
+                .replace("```", "")
+                .replace("'", '"')
+                .strip()
+            )
+            labels = json.loads(cleaned_result)
+            valid_labels = ["bug", "feature", "documentation", "question", "enhancement", "help wanted"]
+            return [l for l in labels if l in valid_labels]
         except Exception:
-            return ["question"]  # default
+            return ["question"]
 
     def review_pr(self, pr_title: str, pr_body: str, diff: str, repo_name: str) -> str:
         prompt = f"""Review this Pull Request on Bhavan's repo "{repo_name}".
