@@ -26,15 +26,14 @@
 
 ---
 
+## 📸 Proof of Concept 
+
 ## 📸 Proof of Concept & Live Demos
 
-| Automated Issue Triage & Labeling | Real-time PR Code Review |
-| :---: | :---: |
-| ![Issue Proof](docs/screenshots/issue_proof.png) | ![PR Review Proof](docs/screenshots/pr_review_proof.png) |
+| Automated PR Code Review | Live Render Deployment | GitHub Code Diff Inspection |
+| :---: | :---: | :---: |
+| ![PR Review Proof](issue_proof.png) | ![Render Proof](render_proof.png) | ![PR Diff Proof](readme_proof.png) |
 
-| Live Render Deployment | Profile README Stats Update |
-| :---: | :---: |
-| ![Render Proof](docs/screenshots/render_proof.png) | ![README Stats Proof](docs/screenshots/readme_proof.png) |
 
 ---
 
