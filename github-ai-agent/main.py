@@ -83,9 +83,13 @@ async def github_webhook(
     if sender == bot_username:
         return {"status": "ignored", "reason": "own event"}
 
-    # Route to agent
+    # Process event asynchronously in a background thread to respond before GitHub times out
     if x_github_event:
-        agent.handle_event(x_github_event, payload)
+        threading.Thread(
+            target=agent.handle_event,
+            args=(x_github_event, payload),
+            daemon=True,
+        ).start()
 
     return {"status": "ok", "event": x_github_event}
 
