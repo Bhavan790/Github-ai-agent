@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  agent:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./thanked_stargazers.json:/app/thanked_stargazers.json
