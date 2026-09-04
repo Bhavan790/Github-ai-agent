@@ -32,7 +32,7 @@
 
 | Automated PR Code Review | Live Render Deployment | GitHub Code Diff Inspection |
 | :---: | :---: | :---: |
-| ![PR Review Proof](issue_proof.png) | ![Render Proof](render_proof.png) | ![PR Diff Proof](readme_proof.png) |
+| ![PR Review Proof](issue.png) | ![Render Proof](render.png) | ![PR Diff Proof](pr.png) |
 
 
 ---
