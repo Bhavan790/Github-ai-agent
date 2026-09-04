@@ -77,9 +77,10 @@ async def github_webhook(
 
     payload = await request.json()
 
-    # Ignore events from the agent itself to prevent infinite loops
+    # Ignore events from the bot account itself to prevent infinite loops
     sender = payload.get("sender", {}).get("login", "")
-    if sender == os.getenv("GITHUB_USERNAME", "Bhavan790"):
+    bot_username = os.getenv("BOT_USERNAME", "BhavanBot")
+    if sender == bot_username:
         return {"status": "ignored", "reason": "own event"}
 
     # Route to agent
