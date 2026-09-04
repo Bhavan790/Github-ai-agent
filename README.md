@@ -28,11 +28,9 @@
 
 ## 📸 Proof of Concept 
 
-## 📸 Proof of Concept & Live Demos
-
 | Automated PR Code Review | Live Render Deployment | GitHub Code Diff Inspection |
 | :---: | :---: | :---: |
-| ![PR Review Proof](Github-ai-agent/pr.png) | ![Render Proof](Github-ai-agent/render.png) | ![PR Diff Proof](Github-ai-agent/issue.png) |
+| ![PR Review Proof](github-ai-agent/pr.png) | ![Render Proof](github-ai-agent/render.png) | ![PR Diff Proof](github-ai-agent/issue.png) |
 
 
 ---
