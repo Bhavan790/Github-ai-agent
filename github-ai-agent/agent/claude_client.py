@@ -19,7 +19,8 @@ class ClaudeClient:
             raise ValueError("GEMINI_API_KEY not set in environment variables")
 
         self.client = genai.Client(api_key=api_key)
-        self.model = "gemini-3.8-flash"
+        # Updated to the required model version
+        self.model = "gemini-3.6-flash"
         self.agent_name = os.getenv("AGENT_NAME", "BhavanBot")
 
         # System prompt — defines the agent's personality
