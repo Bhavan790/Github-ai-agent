@@ -4,11 +4,11 @@
 
 ### An autonomous, asynchronous AI agent that manages your GitHub profile using Gemini 3.6 Flash + FastAPI
 
-[![Python](https://shields.io)](https://python.org)
-[![FastAPI](https://shields.io)](https://tiangolo.com)
-[![Gemini](https://shields.io)](https://google.dev)
-[![Render](https://shields.io)](https://render.com)
-[![License: MIT](https://shields.io)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Gemini](https://img.shields.io/badge/Gemini-3.6_Flash-8E7CC3?style=flat&logo=googlegemini&logoColor=white)](https://ai.google.dev)
+[![Render](https://img.shields.io/badge/Render-Live-46E3B7?style=flat&logo=render&logoColor=white)](https://render.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](LICENSE)
 
 **Asynchronous event processing · Auto-replies to issues · Auto-labels · Automated PR code reviews · Daily README stats updater · Star thanker**
 
